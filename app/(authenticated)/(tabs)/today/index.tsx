@@ -1,29 +1,19 @@
 // import Fab from "@/components/Fab";
+// import { Fab, FabIcon } from "@/components/ui/fab";
+import { AddIcon } from "@/components/ui/icon";
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Page = () => {
-
   return (
-    <View style={[styles.container]}>
+    <View className="container flex">
       <Text>Today</Text>
-      {/* <Fab /> */}
+      {/* <Fab size="sm" placement="bottom right" className="">
+        <FabIcon as={AddIcon} size="sm" />
+      </Fab> */}
     </View>
   );
 };
 export default Page;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    fontSize: 16,
-    backgroundColor: '#fff',
-    fontWeight: 'bold',
-    padding: 14,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    // borderBottomColor: Colors.lightBorder,
-  },
-});
