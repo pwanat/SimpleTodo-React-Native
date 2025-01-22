@@ -5,6 +5,7 @@ import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Toaster } from 'sonner-native';
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -20,6 +21,7 @@ export default function RootLayout() {
           <ClerkLoaded>
             <GluestackUIProvider mode="light">
               <Stack />
+              <Toaster />
             </GluestackUIProvider>
           </ClerkLoaded>
         </ClerkProvider>

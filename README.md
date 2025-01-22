@@ -8,6 +8,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 [x] Add Gluestack UI
 [x] Clerk Auth
+[x] Add Fab
+[x] Add sonner-native
 [] Bottom menu & Tabs
 [] SQLite
 [] Tasks 
