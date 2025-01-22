@@ -1,6 +1,27 @@
-# Welcome to your Expo app 👋
+# Welcome to your SimpleTodo app 👋
+
+This is Simple Todo App.
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
+## TODO
+
+[x] Add Gluestack UI
+[x] Clerk Auth
+[] Bottom menu & Tabs
+[] SQLite
+[] Tasks 
+[] Projects
+[] DatePicker
+[] Modal
+[] Upcoming todos
+[] Swipe gesture
+[] Customize app icon etc.
+[] Add email sign up, refactor sign up/signin code
+[] Change toasts library to sonner-native
+[] Deploy to Android store
+
+npx expo prebuild
 
 ## Get started
 
