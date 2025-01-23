@@ -11,7 +11,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] Add Fab
 [x] Add sonner-native
 [x] Bottom menu & Tabs
-[] SQLite
+[] SQLite & DrizzleORM
 [] Tasks 
 [] Projects
 [] DatePicker
