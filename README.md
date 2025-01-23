@@ -10,7 +10,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] Clerk Auth
 [x] Add Fab
 [x] Add sonner-native
-[] Bottom menu & Tabs
+[x] Bottom menu & Tabs
 [] SQLite
 [] Tasks 
 [] Projects

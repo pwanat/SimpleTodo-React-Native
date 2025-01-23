@@ -1,17 +1,7 @@
 import { useAuth, useOAuth } from "@clerk/clerk-expo";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import WebBrowser from "expo-web-browser";
 import { Ionicons } from "@expo/vector-icons";
-// import { Colors } from "@/constants/Colors";
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
 import { Redirect } from "expo-router";
 
 export default function Index() {
@@ -20,9 +10,6 @@ export default function Index() {
   const { startOAuthFlow: googleOAuth } = useOAuth({
     strategy: "oauth_google",
   });
-
-  const { top } = useSafeAreaInsets();
-  const { user } = useUser();
 
   const handleAppleOAuth = async () => {
     try {
@@ -65,20 +52,28 @@ export default function Index() {
       <View>
         <Image
           source={require("@/assets/images/login.png")}
-          style={styles.bannerImage}
+          className="max-w-sm h-auto"
         />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleAppleOAuth}>
+        <View className="flex gap-4 p-4">
+          {/* TODO: Move buttons to separate component */}
+          <TouchableOpacity
+            className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300"
+            onPress={handleAppleOAuth}
+          >
             <Ionicons name="logo-apple" size={24} />
-            <Text style={styles.buttonText}>Continue with Apple</Text>
+            <Text>Continue with Apple</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleGoogleOAuth}>
+          <TouchableOpacity
+            className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300"
+            onPress={handleGoogleOAuth}
+          >
             <Ionicons name="logo-google" size={24} />
-            <Text style={styles.buttonText}>Continue with Google</Text>
+            <Text>Continue with Google</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          {/* TODO Finish email signup/signin */}
+          <TouchableOpacity className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300">
             <Ionicons name="mail" size={24} />
-            <Text style={styles.buttonText}>Continue with Email</Text>
+            <Text>Continue with Email</Text>
           </TouchableOpacity>
 
           <Text className="text-center text-xs text-slate-600">
@@ -96,29 +91,3 @@ export default function Index() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  bannerImage: {
-    height: 200,
-    resizeMode: "contain",
-    alignSelf: "center",
-  },
-  buttonContainer: {
-    gap: 16,
-    marginHorizontal: 40,
-  },
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
-    padding: 12,
-    borderRadius: 6,
-    borderWidth: StyleSheet.hairlineWidth,
-    // borderColor: Colors.lightBorder,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: "500",
-  },
-});

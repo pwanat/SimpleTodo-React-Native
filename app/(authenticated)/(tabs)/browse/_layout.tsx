@@ -5,7 +5,7 @@ import { Image } from "react-native";
 
 const HeaderLeft = () => {
   const { user } = useUser();
-  return <Image source={{ uri: user?.imageUrl }} style={styles.image} />;
+  return <Image source={{ uri: user?.imageUrl }} className="w-8 h-8 mr-4 rounded-full" />;
 };
 
 const HeaderRight = () => {
@@ -34,12 +34,4 @@ const Layout = () => {
   );
 };
 
-const styles = {
-  image: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    marginRight: 16,
-  },
-};
 export default Layout;
