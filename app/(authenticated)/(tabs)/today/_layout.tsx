@@ -1,19 +1,21 @@
-import { Stack } from 'expo-router';
-// import MoreButton from '@/components/MoreButton';
+import MoreButton from "@/components/MoreButton";
+import { Stack } from "expo-router";
 
 const Layout = () => {
   return (
     <Stack
-      screenOptions={{
-        headerShadowVisible: false,       
-      }}
-      >
+      screenOptions={
+        {
+          // headerShadowVisible: false,
+        }
+      }
+    >
       <Stack.Screen
         name="index"
         options={{
-          title: 'Today',
+          title: "Today",
           headerLargeTitle: true,
-          // headerRight: () => <MoreButton pageName='Today' />,
+          headerRight: () => <MoreButton />,
         }}
       />
     </Stack>
