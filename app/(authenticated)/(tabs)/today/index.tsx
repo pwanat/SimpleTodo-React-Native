@@ -2,6 +2,7 @@ import { Fab, FabIcon } from "@/components/ui/fab";
 import { AddIcon } from "@/components/ui/icon";
 import { toast } from "sonner-native";
 import { View, Text } from "react-native";
+import NewTaskFab from "@/components/NewTaskFab";
 
 const Page = () => {
   const onPress = () => {
@@ -11,14 +12,7 @@ const Page = () => {
   return (
     <View className="container flex flex-1">
       <Text>Today</Text>
-      <Fab
-        size="lg"
-        placement="bottom right"
-        className="m-5 bg-indigo-500"
-        onPress={onPress}
-      >
-        <FabIcon as={AddIcon} size="md" />
-      </Fab>
+      <NewTaskFab />
     </View>
   );
 };
