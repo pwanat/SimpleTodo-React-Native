@@ -3,6 +3,7 @@ import { projects, todos } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export const fetchIncompleteTodos = () => {
+    console.log('fetching incomplete todos');
   return db
     .select()
     .from(todos)
