@@ -20,7 +20,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] Add sonner-native
 [x] Bottom menu & Tabs
 [x] SQLite & DrizzleORM
-[] Today screen
+[x] Today screen
 [] Tasks 
 [] Projects
 [] DatePicker
