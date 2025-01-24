@@ -4,6 +4,13 @@ This is Simple Todo App.
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## STACK
+
+- Expo
+- SQLite + Drizzle
+- Nativewind + Gluestack
+- Clerk Auth
+
 ## TODO
 
 [x] Add Gluestack UI
@@ -11,7 +18,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] Add Fab
 [x] Add sonner-native
 [x] Bottom menu & Tabs
-[] SQLite & DrizzleORM
+[x] SQLite & DrizzleORM
 [] Tasks 
 [] Projects
 [] DatePicker
@@ -20,8 +27,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [] Swipe gesture
 [] Customize app icon etc.
 [] Add email sign up, refactor sign up/signin code
-[] Change toasts library to sonner-native
-[] Deploy to Android store
+[x] Change toasts library to sonner-native
+[] Deploy with EAS
 
 npx expo prebuild
 

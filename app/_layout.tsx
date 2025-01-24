@@ -10,11 +10,29 @@ import { openDatabaseSync, SQLiteProvider } from "expo-sqlite";
 import { Suspense, useEffect } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import colors from "tailwindcss/colors";
-import { drizzle } from "drizzle-orm/expo-sqlite";
+import { drizzle, useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import migrations from "../drizzle/migrations";
+import { useSQLiteContext } from "expo-sqlite";
+import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
+import { todos } from "@/db/schema";
 
-import { seedDB } from "@/utils/seed";
+const InitialLayout = () => {
+  const db = useSQLiteContext();
+  useDrizzleStudio(db);
+  const drizzleDB = drizzle(db);
+  
+  return (
+    <Stack>
+      <Stack.Screen
+        name="oauth-native-callback"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(authenticated)" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
 
 export default function RootLayout() {
   const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
@@ -22,19 +40,16 @@ export default function RootLayout() {
   if (!publishableKey) {
     throw new Error("Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY to your .env file");
   }
-  const expoDB = openDatabaseSync("todos.db");
+  const expoDB = openDatabaseSync('todos.db',  { enableChangeListener: true });
   const db = drizzle(expoDB);
-  console.log("🚀 ~ RootLayout ~ db:", db)
-
   const { success, error } = useMigrations(db, migrations);
-  console.log("🚀 ~ RootLayout ~ success:", success);
 
-  useEffect(() => {
-    if (!db || !success) {
-      return;
-    }
-    seedDB(db);
-  }, [db, success]);
+  // useEffect(() => {
+  //   if (!db || !success) {
+  //     return;
+  //   }
+  //   seedDB(db);
+  // }, [db, success]);
 
   return (
     <SafeAreaProvider>
@@ -50,20 +65,7 @@ export default function RootLayout() {
                 options={{ enableChangeListener: true }}
               >
                 <GluestackUIProvider mode="light">
-                  <Stack>
-                    <Stack.Screen
-                      name="oauth-native-callback"
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="index"
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="(authenticated)"
-                      options={{ headerShown: false }}
-                    />
-                  </Stack>
+                  <InitialLayout />
                   <Toaster />
                 </GluestackUIProvider>
               </SQLiteProvider>
