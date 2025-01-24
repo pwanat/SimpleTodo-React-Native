@@ -4,10 +4,9 @@ import { Todo } from "@/types/todo";
 import { Link } from "expo-router";
 import colors from "tailwindcss/colors";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useSQLiteContext } from "expo-sqlite";
-import { drizzle } from "drizzle-orm/expo-sqlite";
 import { todos } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { db } from "@/db/client";
 
 type Props = {
   task: Todo;
@@ -15,12 +14,8 @@ type Props = {
 
 const TaskRow = ({ task }: Props) => {
 
-    const db = useSQLiteContext();
-    const drizzleDB = drizzle(db);
-
     const markAsCompleted = async (checked: boolean) => {
-        console.log('markAsCompleted', task.id);
-        await drizzleDB.update(todos).set({ completed: checked ? 1 : 0, date_completed: Date.now() }).where(eq(todos.id, task.id));
+        await db.update(todos).set({ completed: checked ? 1 : 0, date_completed: Date.now() }).where(eq(todos.id, task.id));
     }
 
   return (

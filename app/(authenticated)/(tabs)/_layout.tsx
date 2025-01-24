@@ -3,7 +3,9 @@ import { Tabs } from 'expo-router';
 
 const TabLayout = () => {
   return (
-      <Tabs>
+      <Tabs
+      
+      >
         <Tabs.Screen
           name="today"
           options={{
