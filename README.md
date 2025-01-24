@@ -6,7 +6,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## STACK
 
-- Expo
+- React Native 0.76
+- Expo 52
 - SQLite + Drizzle
 - Nativewind + Gluestack
 - Clerk Auth
@@ -19,6 +20,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] Add sonner-native
 [x] Bottom menu & Tabs
 [x] SQLite & DrizzleORM
+[] Today screen
 [] Tasks 
 [] Projects
 [] DatePicker
