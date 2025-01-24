@@ -7,7 +7,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 ## STACK
 
 - React Native 0.76
-- Expo 52
+- Expo 52 (New Architecture)
 - SQLite + Drizzle
 - Nativewind + Gluestack
 - Clerk Auth

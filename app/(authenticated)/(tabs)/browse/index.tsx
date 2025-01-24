@@ -1,28 +1,88 @@
 import NewTaskFab from "@/components/NewTaskFab";
 import { Button } from "@/components/ui/button";
-import { AddIcon, Icon } from "@/components/ui/icon";
+import { Divider } from "@/components/ui/divider";
+import { AddIcon, Icon, TrashIcon } from "@/components/ui/icon";
 import { db } from "@/db/client";
 import { projects } from "@/db/schema";
 import { useAuth } from "@clerk/clerk-expo";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import { Link } from "expo-router";
-import { View, Text } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  Menu,
+  MenuItem,
+  MenuItemLabel,
+  MenuSeparator,
+} from "@/components/ui/menu";
+import { eq } from "drizzle-orm";
 
 const Page = () => {
   const { signOut } = useAuth();
 
   const { data } = useLiveQuery(db.select().from(projects));
+
+  const deleteProject = async (id: number) => {
+    await db.delete(projects).where(eq(projects.id, id));
+  };
+
   return (
     <View className="container flex flex-1 p-6">
-      <View className="flex-row justify-between flex-1">
+      <View className="flex-row justify-between">
         <Text className="text-xl font-bold">My Projects</Text>
         <Link href="/(authenticated)/(tabs)/browse/new-project">
           <Icon as={AddIcon} size="xl" />
         </Link>
       </View>
-      <Button variant='outline' onPress={() => signOut()} className="mb-24" action="primary">
-        <Text>Sign out</Text>
-      </Button>
+      <FlatList
+        className="py-4"
+        data={data}
+        renderItem={({ item }) => (
+          <Menu
+            offset={-48}
+            placement="bottom left"
+            trigger={({ ...triggerProps }) => {
+              return (
+                <TouchableOpacity
+                  {...triggerProps}
+                  className="flex-row gap-2 bg-white p-4 rounded-md"
+                >
+                  <Text style={{ color: item.color }}>#</Text>
+                  <Text>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            }}
+          >
+            <MenuItem
+              key="delete"
+              textValue="Delete"
+              className="p-2 web:min-w-[294px] min-w-[225px]"
+              onPress={() => {
+                deleteProject(item.id);
+              }}
+            >
+              <Icon as={TrashIcon} size="sm" className="mr-2" />
+              <MenuItemLabel size="sm">Delete</MenuItemLabel>
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem key="Orders" textValue="Orders" className="p-2">
+              <MenuItemLabel size="sm">Orders</MenuItemLabel>
+            </MenuItem>
+          </Menu>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={() => <Divider className="my-0.5" />}
+        ListFooterComponent={
+          <Button
+            variant="outline"
+            onPress={() => signOut()}
+            className="mt-4"
+            action="primary"
+          >
+            <Text>Sign out</Text>
+          </Button>
+        }
+      />
+
       <NewTaskFab />
     </View>
   );

@@ -5,7 +5,12 @@ import { Image } from "react-native";
 
 const HeaderLeft = () => {
   const { user } = useUser();
-  return <Image source={{ uri: user?.imageUrl }} className="w-8 h-8 mr-4 rounded-full" />;
+  return (
+    <Image
+      source={{ uri: user?.imageUrl }}
+      className="w-8 h-8 mr-4 rounded-full"
+    />
+  );
 };
 
 const HeaderRight = () => {
@@ -28,6 +33,13 @@ const Layout = () => {
           },
           headerLeft: () => <HeaderLeft />,
           headerRight: () => <HeaderRight />,
+        }}
+      />
+      <Stack.Screen
+        name="new-project"
+        options={{
+          presentation: "modal",
+          headerShown: false,
         }}
       />
     </Stack>

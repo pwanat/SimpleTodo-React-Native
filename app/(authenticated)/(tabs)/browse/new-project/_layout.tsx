@@ -1,10 +1,29 @@
-import React from 'react'
-import { Stack } from 'expo-router'
+import React from "react";
+import { Stack, useRouter } from "expo-router";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { ChevronLeftIcon } from "@/components/ui/icon";
 
-export default function _layout() {
+export default function Layout() {
+  const router = useRouter();
   return (
-    <Stack>
-      <Stack.Screen name='index' />
+    <Stack screenOptions={{}}>
+      <Stack.Screen
+        name="index"
+        options={{
+          title: "New Project",
+          headerLeft: () => (
+            <Button
+              variant="link"
+              onPress={() => router.dismiss()}
+              className="mr-4 flex items-center pt-1"
+            >
+              <ButtonIcon as={ChevronLeftIcon} />
+              <ButtonText>Cancel</ButtonText>
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen name="color-select" options={{ title: "Color" }} />
     </Stack>
-  )
+  );
 }
