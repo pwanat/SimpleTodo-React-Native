@@ -1,18 +1,27 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { Link, Stack, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Link, Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { db } from "@/db/client";
 import { projects } from "@/db/schema";
 import { Ionicons } from "@expo/vector-icons";
 import { DEFAULT_PROJECT_COLOR } from "@/constants/colors";
 import { Input, InputField } from "@/components/ui/input";
+import { Button, ButtonText } from "@/components/ui/button";
+import { ChevronRightIcon, Icon } from "@/components/ui/icon";
 
 const Page = () => {
   const router = useRouter();
+  const { bg } = useGlobalSearchParams<{ bg?: string }>();
   const [projectName, setProjectName] = useState("");
   const [selectedColor, setSelectedColor] = useState<string>(
     DEFAULT_PROJECT_COLOR
   );
+
+  useEffect(() => {
+    if (bg) {
+      setSelectedColor(bg);
+    }
+  }, [bg]);
 
   const onCreateProject = async () => {
     await db.insert(projects).values({
@@ -27,22 +36,19 @@ const Page = () => {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <TouchableOpacity
+            <Button
               onPress={onCreateProject}
-              disabled={projectName === ""}
+              isDisabled={!projectName}
+              variant="link"
             >
-              <Text
-              // style={projectName === '' ? styles.btnTextDisabled : styles.btnText}
-              >
-                Create
-              </Text>
-            </TouchableOpacity>
+              <ButtonText>Create</ButtonText>
+            </Button>
           ),
         }}
       />
 
-      <View>
-        <Input variant="outline" size="md">
+      <View className="container flex flex-col p-4 gap-2 ">
+        <Input variant="outline" size="md" className=" bg-white p-4 min-h-16">
           <InputField
             placeholder="New project name..."
             value={projectName}
@@ -51,21 +57,15 @@ const Page = () => {
           />
         </Input>
 
-        {/* <TextInput
-          value={projectName}
-          onChangeText={setProjectName}
-          placeholder="Name"
-          autoFocus
-        /> */}
-
         <Link href="/browse/new-project/color-select" asChild>
-          <TouchableOpacity>
+          <TouchableOpacity className="flex-row items-center  gap-2 p-4 min-h-16 border border-background-300 bg-white">
             <Ionicons name="color-palette-outline" size={24} />
-            <Text>Color</Text>
+            <Text className="flex-1">Color</Text>
             <View
-            // style={[styles.colorPreview, { backgroundColor: selectedColor }]}
+              className="w-6 h-6 rounded-full border border-background-300"
+              style={{ backgroundColor: selectedColor }}
             />
-            <Ionicons name="chevron-forward" size={22} />
+            <Icon as={ChevronRightIcon} />
           </TouchableOpacity>
         </Link>
       </View>
