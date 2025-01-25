@@ -23,7 +23,13 @@ export default function Layout() {
           ),
         }}
       />
-      <Stack.Screen name="color-select" options={{ title: "Color" }} />
+      <Stack.Screen
+        name="color-select"
+        options={{
+          title: "Color",
+          headerTransparent: true,
+        }}
+      />
     </Stack>
   );
 }
