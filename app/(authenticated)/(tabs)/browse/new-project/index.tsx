@@ -1,33 +1,29 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useEffect, useState } from "react";
-import { Link, Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import { db } from "@/db/client";
-import { projects } from "@/db/schema";
+import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Link, Stack, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { DEFAULT_PROJECT_COLOR } from "@/constants/colors";
 import { Input, InputField } from "@/components/ui/input";
 import { Button, ButtonText } from "@/components/ui/button";
 import { ChevronRightIcon, Icon } from "@/components/ui/icon";
+import useNewProjectStore from "@/stores/new-project-store";
+import { createProject } from "@/api/projects";
 
 const Page = () => {
   const router = useRouter();
-  const { bg } = useGlobalSearchParams<{ bg?: string }>();
   const [projectName, setProjectName] = useState("");
-  const [selectedColor, setSelectedColor] = useState<string>(
-    DEFAULT_PROJECT_COLOR
+  const selectedColor = useNewProjectStore((state) => state.selectedColor);
+  const resetSelectedColor = useNewProjectStore(
+    (state) => state.resetSelectedColor
   );
 
-  useEffect(() => {
-    if (bg) {
-      setSelectedColor(bg);
-    }
-  }, [bg]);
-
   const onCreateProject = async () => {
-    await db.insert(projects).values({
+    const newProject = {
       name: projectName,
       color: selectedColor,
-    });
+    };
+
+    createProject(newProject);
+    resetSelectedColor(); // TODO: This store should be context to this index.tsx file, so the colors resets every time we start new project
     router.dismiss();
   };
 

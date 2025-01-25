@@ -11,6 +11,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 - SQLite + Drizzle
 - Nativewind + Gluestack
 - Clerk Auth
+- Zustand
 
 ## TODO
 

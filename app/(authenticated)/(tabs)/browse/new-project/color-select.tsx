@@ -1,20 +1,18 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
-import { Ionicons } from "@expo/vector-icons";
-import { DEFAULT_PROJECT_COLOR, PROJECT_COLORS } from "@/constants/colors";
+import { PROJECT_COLORS } from "@/constants/colors";
+import useNewProjectStore from "@/stores/new-project-store";
+import { CheckIcon, Icon } from "@/components/ui/icon";
+import colors from "tailwindcss/colors";
 
 const Page = () => {
-  const [selected, setSelected] = useState<string>(DEFAULT_PROJECT_COLOR);
-  const router = useRouter();
+  const selectedColor = useNewProjectStore((state) => state.selectedColor);
+  const setSelectedColor = useNewProjectStore((state) => state.setSelectedColor);
+
   const headerHeight = useHeaderHeight();
 
   const onColorSelect = (color: string) => {
-    setSelected(color);
-
-    // Looks like this is quite slow, we should probably use a different method like zustand/context
-    router.setParams({ bg: color });
+    setSelectedColor(color);
   };
 
   return (
@@ -29,8 +27,8 @@ const Page = () => {
             }}
             onPress={() => onColorSelect(color)}
           >
-            {selected === color && (
-              <Ionicons name="checkmark" size={24} color={"#fff"} style={{}} />
+            {selectedColor === color && (
+              <Icon as={CheckIcon} color={colors.white} />              
             )}
           </TouchableOpacity>
         ))}
