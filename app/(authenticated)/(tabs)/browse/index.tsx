@@ -15,6 +15,7 @@ import {
   MenuSeparator,
 } from "@/components/ui/menu";
 import { eq } from "drizzle-orm";
+import Animated, { LinearTransition } from "react-native-reanimated";
 
 const Page = () => {
   const { signOut } = useAuth();
@@ -33,8 +34,9 @@ const Page = () => {
           <Icon as={AddIcon} size="xl" />
         </Link>
       </View>
-      <FlatList
+      <Animated.FlatList
         className="py-4"
+        itemLayoutAnimation={LinearTransition}
         data={data}
         renderItem={({ item }) => (
           <Menu

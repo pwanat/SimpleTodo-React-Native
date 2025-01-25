@@ -23,7 +23,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 [x] SQLite & DrizzleORM
 [x] Today screen
 [] Tasks 
-[] Projects
+[x] Projects
 [] DatePicker
 [] Modal
 [] Upcoming todos
