@@ -1,7 +1,8 @@
 import { useUser } from "@clerk/clerk-expo";
-import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { Image } from "react-native";
+import { Settings } from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
 
 const HeaderLeft = () => {
   const { user } = useUser();
@@ -14,8 +15,9 @@ const HeaderLeft = () => {
 };
 
 const HeaderRight = () => {
-  return <Ionicons name="settings-outline" size={24} />;
+  return <Icon as={Settings} size='xl' />;
 };
+
 const Layout = () => {
   return (
     <Stack
@@ -30,7 +32,7 @@ const Layout = () => {
           headerLargeTitle: true,
           headerSearchBarOptions: {
             placeholder: "Tasks, Projects and more",
-          },
+          },          
           headerLeft: () => <HeaderLeft />,
           headerRight: () => <HeaderRight />,
         }}

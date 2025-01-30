@@ -11,6 +11,7 @@ export default function Layout() {
         name="index"
         options={{
           title: "New Project",
+          headerTitleAlign: 'center',
           headerLeft: () => (
             <Button
               variant="link"

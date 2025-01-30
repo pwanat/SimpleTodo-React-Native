@@ -17,6 +17,7 @@ import {
 import { eq } from "drizzle-orm";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
+
 const Page = () => {
   const { signOut } = useAuth();
 

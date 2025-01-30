@@ -1,5 +1,6 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { Icon } from '@/components/ui/icon';
 import { Tabs } from 'expo-router';
+import { House, CalendarDays, Search, List } from "lucide-react-native";
 
 const TabLayout = () => {
   return (
@@ -10,7 +11,7 @@ const TabLayout = () => {
           name="today"
           options={{
             title: "Today",
-            tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+            tabBarIcon: ({ color }) => <Icon as={House} color={color} size='xl' />,
             headerShown: false
           }}
         />
@@ -18,7 +19,7 @@ const TabLayout = () => {
           name="upcoming"
           options={{
             title: "Upcoming",
-            tabBarIcon: ({ color }) => <FontAwesome size={28} name="calendar" color={color} />,
+            tabBarIcon: ({ color }) => <Icon as={CalendarDays} color={color} size='xl' />,
             headerShown: false
           }}
         />
@@ -26,7 +27,7 @@ const TabLayout = () => {
           name="search"
           options={{
             title: "Search",
-            tabBarIcon: ({ color }) => <FontAwesome size={28} name="search" color={color} />,
+            tabBarIcon: ({ color }) =>  <Icon as={Search} color={color} size='xl' />,
             headerShown: false
           }}
         />
@@ -34,7 +35,7 @@ const TabLayout = () => {
           name="browse"
           options={{
             title: "Browse",
-            tabBarIcon: ({ color }) => <FontAwesome size={28} name="th-list" color={color} />,
+            tabBarIcon: ({ color }) => <Icon as={List} color={color} size='xl' />,
             headerShown: false
           }}
         />

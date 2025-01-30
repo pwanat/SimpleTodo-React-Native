@@ -7,6 +7,7 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { ChevronRightIcon, Icon } from "@/components/ui/icon";
 import useNewProjectStore from "@/stores/new-project-store";
 import { createProject } from "@/api/projects";
+import { Palette } from "lucide-react-native";
 
 const Page = () => {
   const router = useRouter();
@@ -55,7 +56,7 @@ const Page = () => {
 
         <Link href="/browse/new-project/color-select" asChild>
           <TouchableOpacity className="flex-row items-center  gap-2 p-4 min-h-16 border border-background-300 bg-white">
-            <Ionicons name="color-palette-outline" size={24} />
+            <Icon as={Palette} size="xl" />
             <Text className="flex-1">Color</Text>
             <View
               className="w-6 h-6 rounded-full border border-background-300"
