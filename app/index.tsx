@@ -3,6 +3,7 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 import WebBrowser from "expo-web-browser";
 import { Ionicons } from "@expo/vector-icons";
 import { Redirect } from "expo-router";
+import AuthProviderButton from "@/components/AuthProviderButton";
 
 export default function Index() {
   const { isSignedIn } = useAuth();
@@ -55,26 +56,21 @@ export default function Index() {
           className="max-w-sm h-auto"
         />
         <View className="flex gap-4 p-4">
-          {/* TODO: Move buttons to separate component */}
-          <TouchableOpacity
-            className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300"
+          <AuthProviderButton
             onPress={handleAppleOAuth}
-          >
-            <Ionicons name="logo-apple" size={24} />
-            <Text>Continue with Apple</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300"
+            text="Continue with Apple"
+            icon={<Ionicons name="logo-apple" size={24} />}
+          />
+          <AuthProviderButton
             onPress={handleGoogleOAuth}
-          >
-            <Ionicons name="logo-google" size={24} />
-            <Text>Continue with Google</Text>
-          </TouchableOpacity>
-          {/* TODO Finish email signup/signin */}
-          <TouchableOpacity className="flex flex-row justify-center items-center gap-2 p-3 rounded-md border border-slate-300">
-            <Ionicons name="mail" size={24} />
-            <Text>Continue with Email</Text>
-          </TouchableOpacity>
+            text="Continue with Google"
+            icon={<Ionicons name="logo-google" size={24} />}
+          />
+          <AuthProviderButton
+            onPress={handleGoogleOAuth}
+            text="Continue with Email"
+            icon={<Ionicons name="mail" size={24} />}
+          />
 
           <Text className="text-center text-xs text-slate-600">
             By continuing you agree to Todoist's clone{" "}
