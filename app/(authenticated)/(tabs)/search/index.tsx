@@ -1,17 +1,22 @@
 import NewTaskFab from "@/components/NewTaskFab";
-import React from "react";
+import TodoForm from "@/components/TodoForm";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import React, { useRef } from "react";
 import { StyleSheet, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 const Page = () => {
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   return (
     <>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={styles.container}>
+        contentContainerStyle={styles.container}
+      >
         <Text>Search page</Text>
       </ScrollView>
-      <NewTaskFab />
+      {/* <NewTaskFab bottomSheetModalRef={bottomSheetModalRef} />
+      <TodoForm ref={bottomSheetModalRef}/> */}
     </>
   );
 };

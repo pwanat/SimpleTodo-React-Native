@@ -1,15 +1,17 @@
 import React from "react";
 import { Fab, FabIcon } from "./ui/fab";
 import { AddIcon } from "./ui/icon";
-import { useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
-const NewTaskFab = () => {
-  const router = useRouter();
+type Props = {
+  bottomSheetModalRef: React.RefObject<BottomSheetModal>;
+};
 
+const NewTaskFab = ({ bottomSheetModalRef }: Props) => {
   const onPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    router.push("/task/new");
+    bottomSheetModalRef.current?.present();
   };
 
   return (

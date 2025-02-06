@@ -5,9 +5,9 @@ import { AddIcon, Icon, TrashIcon } from "@/components/ui/icon";
 import { db } from "@/db/client";
 import { projects } from "@/db/schema";
 import { useAuth } from "@clerk/clerk-expo";
-import { useLiveQuery } from "drizzle-orm/expo-sqlite";
+
 import { Link } from "expo-router";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
   Menu,
   MenuItem,
@@ -16,12 +16,17 @@ import {
 } from "@/components/ui/menu";
 import { eq } from "drizzle-orm";
 import Animated, { LinearTransition } from "react-native-reanimated";
+import { fetchProjects } from "@/api/projects";
+import { useRef } from "react";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import TodoForm from "@/components/TodoForm";
 
 
 const Page = () => {
   const { signOut } = useAuth();
-
-  const { data } = useLiveQuery(db.select().from(projects));
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  
+  const { data } = fetchProjects();
 
   const deleteProject = async (id: number) => {
     await db.delete(projects).where(eq(projects.id, id));
@@ -86,7 +91,8 @@ const Page = () => {
         }
       />
 
-      <NewTaskFab />
+      {/* <NewTaskFab bottomSheetModalRef={bottomSheetModalRef} />
+      <TodoForm ref={bottomSheetModalRef}/> */}
     </View>
   );
 };
